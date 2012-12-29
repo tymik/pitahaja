@@ -1,10 +1,13 @@
 #include <iostream>
 #include <iterator>
+#include <string>
 
 #include <boost/program_options.hpp>
 
-namespace po = boost::program_options;
 using namespace std;
+#include "io.h"
+
+namespace po = boost::program_options;
 
 void menu (int argc, char* argv[]) {
 
