@@ -10,5 +10,5 @@ class Image {
 	public:
 		void load(string img_path);
 		void save();
-		Image();
+		void run_func( void (*func)(unsigned char*, int) );
 };
