@@ -2,7 +2,9 @@ global asm_invert:function
 
 asm_invert:
 	mov r8, rdi ; array pointer here
+	mov r15, rci ; image size here
 
+invert:
 	mov r9, 255 ; 255 for subtracting
 	mov r10, [r8] ; value of dword
 	shr r10, 24 ; getting first byte of dword
@@ -38,4 +40,7 @@ asm_invert:
 	add r11, r9 ; move to temp and last pixel here is done, so dword done, can loop
 
 	mov [r8], r11 ; put changed dword back to it's place
-	jmp asm_invert ; this jump has to consider length, not done now
+
+	add r8, 4 ; move to next dword
+	sub r15, 4 ; subtract
+	jmp invert ; this jump has to consider length, not done now
