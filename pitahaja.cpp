@@ -7,9 +7,11 @@
 using namespace std;
 #include "io.h"
 
+
 namespace po = boost::program_options;
 
 void menu (int argc, char* argv[]) {
+const char *img_path="images/FF7F3F_25x25.png";
 
 	po::options_description desc("Usage:\npitahaja [options] source destination");
 	desc.add_options()
@@ -25,6 +27,10 @@ void menu (int argc, char* argv[]) {
 		cout << desc << "\n";
 	else if (param.count("placeholder"))
 		cout << "Just a placeholder\n";
+	else if (param.count("tryimg")) {
+		Image image = Image();
+		image.load(img_path);
+	}
 	else {
 		cout << "Not a valid execution arguments\n";
 		cout << desc << "\n";
