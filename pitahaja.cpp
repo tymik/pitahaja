@@ -17,6 +17,7 @@ const char *img_path="images/FF7F3F_25x25.png";
 	desc.add_options()
 		("help", "shows this short help")
 		("placeholder", "placeholder")
+		("tryimg", "test calling an image")
 	;
 	
 	po::variables_map param;
