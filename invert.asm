@@ -2,7 +2,7 @@ global asm_invert:function
 
 asm_invert:
 	mov r8, rdi ; array pointer here
-	mov r15, rci ; image size here
+	mov r15, rsi ; image size here
 
 invert:
 	mov r9, 255 ; 255 for subtracting
