@@ -10,6 +10,6 @@ class Image {
 		CImg<unsigned char> *image;
 	public:
 		void load(std::string img_path);
-		void save();
+		void save(std::string save_path);
 		void run_func( void (*func)(unsigned char*, int) );
 };

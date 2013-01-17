@@ -31,6 +31,7 @@ const char *img_path="images/FF7F3F_25x25.png";
 	else if (param.count("tryimg")) {
 		Image image = Image();
 		image.load(img_path);
+		image.save("images/save_test.png");
 	}
 	else {
 		cout << "Not a valid execution arguments\n";
