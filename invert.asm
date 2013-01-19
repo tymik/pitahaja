@@ -50,6 +50,6 @@ inverted:
 
 	add r8, 4 ; move to next dword
 	sub r15, 1 ; subtract from size - loop exit condition
-	jnz invert ; this jump has to consider length, not done now
+	jnbe invert ; this jump has to consider length, not done now
 
 	ret ; return from function
