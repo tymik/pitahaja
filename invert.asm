@@ -7,41 +7,43 @@ asm_invert:
 invert:
 	mov r9, 255 ; 255 for subtracting
 	mov r10, [r8] ; value of dword
-	shr r10, 24 ; getting first byte of dword
+	shr r10, 8*3 ; getting first byte of dword
 	and r10, 0xff ; mask
 	sub r9, r10 ; color inversion, 255-value
-	shl r9, 24 ; move byte to start of dword
-	and r9, 0xff000000 ; another mask
+	shl r9, 8*3 ; move byte to start of dword
+	and r9, 0xff<<8*3 ; another mask
 	mov r11, r9 ; move to temp and first pixel here is done
 	sub r15, 1 ; subtract from size - loop exit condition
 	jz inverted ; jump if all pixels are processed
 
 	mov r9, 255 ; 255 for subtracting
 	mov r10, [r8] ; value of dword
-	shr r10, 16 ; getting second byte of dword
+	shr r10, 8*2 ; getting second byte of dword
 	and r10, 0xff ; mask
 	sub r9, r10 ; color inversion, 255-value
-	shl r9, 16 ; move byte to start of dword
-	and r9, 0x00ff0000 ; another mask
+	shl r9, 8*2 ; move byte to second octet of dword
+	and r9, 0xff<<8*2 ; another mask
 	add r11, r9 ; move to temp and second pixel here is done
 	sub r15, 1 ; subtract from size - loop exit condition
 	jz inverted ; jump if all pixels are processed
 
 	mov r9, 255 ; 255 for subtracting
 	mov r10, [r8] ; value of dword
-	shr r10, 8 ; getting third byte of dword
+	shr r10, 8*1 ; getting third byte of dword
 	and r10, 0xff ; mask
 	sub r9, r10 ; color inversion, 255-value
-	shl r9, 8 ; move byte to start of dword
-	and r9, 0x0000ff00 ; another mask
+	shl r9, 8*1 ; move byte to third octet of dword
+	and r9, 0xff<<8*1 ; another mask
 	add r11, r9 ; move to temp and third pixel here is done
 	sub r15, 1 ; subtract from size - loop exit condition
 	jz inverted ; jump if all pixels are processed
 
 	mov r9, 255 ; 255 for subtracting
 	mov r10, [r8] ; value of dword
+	shr r10, 8*0 ; getting last byte of dword
 	and r10, 0xff ; mask - getting last byte of dword
 	sub r9, r10 ; color inversion, 255-value
+	shl r9, 8*0 ; move byte to forth octet of dword
 	and r9, 0xff ; another mask
 	add r11, r9 ; move to temp and last pixel here is done, so dword done, can loop
 
