@@ -3,12 +3,9 @@ global asm_invert:function
 %macro invert_pixel 1
         mov r9, 0xff<<8*%1 ; 255 for subtracting
         mov r10, [r8] ; value of dword
-;        shr r10, 8*%1 ; getting first byte of dword
         and r10, 0xff<<8*%1 ; mask
         sub r9, r10 ; color inversion, 255-value
-;        shl r9, 8*%1 ; move byte to start of dword
-;        and r9, 0xff<<8*%1 ; another mask
-        or r11, r9 ; move to temp and first pixel here is done
+        add r11, r9 ; move to temp and first pixel here is done
         sub r15, 1 ; subtract from size - loop exit condition
         jz inverted ; jump if all pixels are processed
 %endmacro

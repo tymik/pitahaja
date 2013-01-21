@@ -12,12 +12,14 @@ namespace po = boost::program_options;
 
 void menu (int argc, char* argv[]) {
 const char *img_path="images/FF7F3F_25x25.png";
+const char *img_path2="images/3F7FFF_25x25.png";
 
 	po::options_description desc("Usage:\npitahaja [options] source destination");
 	desc.add_options()
 		("help", "shows this short help")
 		("placeholder", "placeholder")
 		("tryimg", "test calling an image")
+		("tryimg2", "test calling an image 2")
 	;
 	
 	po::variables_map param;
@@ -33,6 +35,12 @@ const char *img_path="images/FF7F3F_25x25.png";
 		image.load(img_path);
 		image.run_func(asm_invert);
 		image.save("images/save_test.png");
+	}
+	else if (param.count("tryimg2")) {
+		Image image = Image();
+		image.load(img_path2);
+		image.run_func(asm_invert);
+		image.save("images/save_test2.png");
 	}
 	else {
 		cout << "Not a valid execution arguments\n";
