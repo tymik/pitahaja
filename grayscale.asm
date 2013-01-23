@@ -14,11 +14,13 @@ global asm_grayscale:function
 	and r12, 0xff
 	add r11, r12
 
-	mov r8b, [r13+2*r14]
+	mov r8b, [r13+r14]
 	mov r12, r8
 	shr r12, 8*7
 	and r12, 0xff
 	add r11, r12
+
+	mov [r8b], r11b
 %endmacro
 
 %macro norm_green 0
@@ -40,6 +42,8 @@ global asm_grayscale:function
 	shr r12, 8*7
 	and r12, 0xff
 	add r11, r12
+
+	mov [r8b], r11b
 %endmacro
 
 %macro norm_blue 0
@@ -61,6 +65,8 @@ global asm_grayscale:function
 	shr r12, 8*7
 	and r12, 0xff
 	add r11, r12
+
+	mov [r8b], r11b
 %endmacro
 
 asm_grayscale:
@@ -74,7 +80,23 @@ asm_grayscale:
 	mov r10, r14
 red:
 	norm_red
+	add r13, 1
+	sub r10, 1
+	jnz red
 
-	mov [r8b], r11
+	mov r10, r14
+green:
+	norm_green
+	add r13, 1
+	sub r10, 1
+	jnz green
+
+	mov r10, r14
+blue:
+	norm_blue
+	add r13, 1
+	sub r10, 1
+	jnz blue
+
 
 	ret ; return from function
