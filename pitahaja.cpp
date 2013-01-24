@@ -13,6 +13,7 @@ namespace po = boost::program_options;
 void menu (int argc, char* argv[]) {
 const char *img_path="images/FF7F3F_25x25.png";
 const char *img_path2="images/3F7FFF_25x25.png";
+const char *img_path3="images/FF6600_25x25.png";
 
 	po::options_description desc("Usage:\npitahaja [options] source destination");
 	desc.add_options()
@@ -32,7 +33,7 @@ const char *img_path2="images/3F7FFF_25x25.png";
 		cout << "Just a placeholder\n";
 	else if (param.count("tryimg")) {
 		Image image = Image();
-		image.load(img_path);
+		image.load(img_path3);
 		image.run_func(asm_grayscale);
 		image.save("images/save_test.png");
 	}

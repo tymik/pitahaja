@@ -21,8 +21,10 @@ global asm_grayscale:function
 	add r11, r12
 
 	mov rax, r11
-	mov rdx, 3
-	div rdx
+	cdq
+	xor rbx, rbx
+	mov rbx, 3
+	div rbx
 	mov r11, rax
 
 	mov r8b, r11b
@@ -51,8 +53,10 @@ global asm_grayscale:function
 	add r11, r12
 
 	mov rax, r11
-	mov rdx, 3
-	div rdx
+	cdq
+	xor rbx, rbx
+	mov rbx, 3
+	div rbx
 	mov r11, rax
 
 	mov r8b, r11b
@@ -83,8 +87,10 @@ global asm_grayscale:function
 	add r11, r12
 
 	mov rax, r11
-	mov rdx, 3
-	div rdx
+	cdq
+	xor rbx, rbx
+	mov rbx, 3
+	div rbx
 	mov r11, rax
 
 	mov r8b, r11b
@@ -94,8 +100,10 @@ asm_grayscale:
         mov r13, rdi ; array pointer here
         mov r15, rsi ; image size here
 	mov rax, rsi ;
-	mov rdx, 3
-	div rdx 
+	cdq
+	xor rbx, rbx
+	mov rbx, 3
+	div rbx 
 	mov r14, rax ;
 
 	mov r10, r14
