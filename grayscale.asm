@@ -20,6 +20,11 @@ global asm_grayscale:function
 	and r12, 0xff
 	add r11, r12
 
+	mov rax, r11
+	mov rdx, 3
+	div rdx
+	mov r11, rax
+
 	mov r8b, r11b
 %endmacro
 
@@ -44,6 +49,11 @@ global asm_grayscale:function
 	shr r12, 8*7
 	and r12, 0xff
 	add r11, r12
+
+	mov rax, r11
+	mov rdx, 3
+	div rdx
+	mov r11, rax
 
 	mov r8b, r11b
 %endmacro
@@ -71,6 +81,11 @@ global asm_grayscale:function
 	shr r12, 8*7
 	and r12, 0xff
 	add r11, r12
+
+	mov rax, r11
+	mov rdx, 3
+	div rdx
+	mov r11, rax
 
 	mov r8b, r11b
 %endmacro
