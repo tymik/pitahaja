@@ -14,15 +14,13 @@ global asm_grayscale:function
 	and r12, 0xff
 	add r11, r12
 
-	shl r14, 1
-	mov r8b, [r13+r14] ; 2*r14
-	shr r14, 1
+	mov r8b, [r13+r14*2] ; 2*r14
 	mov r12, r8
 	shr r12, 8*7
 	and r12, 0xff
 	add r11, r12
 
-	mov [r8b], r11b
+	mov r8b, r11b
 %endmacro
 
 %macro norm_green 0
@@ -47,15 +45,13 @@ global asm_grayscale:function
 	and r12, 0xff
 	add r11, r12
 
-	mov [r8b], r11b
+	mov r8b, r11b
 %endmacro
 
 %macro norm_blue 0
 	xor r11, r11
 	neg r14
-	shl r14, 1
-	mov r8b, [r13+r14] ; -2*r14
-	shr r14, 1
+	mov r8b, [r13+r14*2] ; -2*r14
 	neg r14
 	mov r12, r8
 	shr r12, 8*7
@@ -76,7 +72,7 @@ global asm_grayscale:function
 	and r12, 0xff
 	add r11, r12
 
-	mov [r8b], r11b
+	mov r8b, r11b
 %endmacro
 
 asm_grayscale:
