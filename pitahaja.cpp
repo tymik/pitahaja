@@ -33,7 +33,7 @@ const char *img_path2="images/3F7FFF_25x25.png";
 	else if (param.count("tryimg")) {
 		Image image = Image();
 		image.load(img_path);
-		image.run_func(asm_invert);
+		image.run_func(asm_grayscale);
 		image.save("images/save_test.png");
 	}
 	else if (param.count("tryimg2")) {
