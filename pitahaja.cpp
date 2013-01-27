@@ -35,7 +35,7 @@ const char *img_path3="images/FF6600_25x25.png";
 		Image image = Image();
 		image.load(img_path3);
 		image.run_func(asm_grayscale);
-		image.save("images/save_test.png");
+		image.save("images/save_test3.png");
 	}
 	else if (param.count("tryimg2")) {
 		Image image = Image();
