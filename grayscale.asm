@@ -46,7 +46,14 @@ global asm_grayscale:function
 	shr rax, 8*8+%1*8
 	shr rdx, 8*8+%1*8
 	and rax, rdx
+	shl rdx, 8*8+%1*8
 	neg %1
+
+	shr rcx, 8*8+%1*8
+	shr rdx, 8*8+%1*8
+	and rcx, rdx
+	
+	add rax,rcx
 %endmacro
 
 asm_grayscale:
@@ -77,6 +84,13 @@ full_reg:
 	jnb full_reg ; if there is still at least one full register to convert
 	jz end ; if there were only full registers to be processed
 
+unfull:
 	norm_unfull r10
+	sub r10, 1
+	jnbe unfull
 
-end:	ret ; return from function
+	mov r11, rax
+	put_full_reg
+
+end:
+	ret ; return from function
