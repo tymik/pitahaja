@@ -35,22 +35,30 @@ global asm_grayscale:function
 %endmacro
 
 %macro norm_unfull 1 ; normalization for images with dimension not being multiply of 8
+	xor rbp, rbp
+	xor rsp, rsp
+
+	mov rbp, [r13] ; tmp1 changed from rax
+	mov rsp, [r13] ; tmp2 changed from rcx
+	mov rbx, 0xFFFFFFFFFFFFFFFF ; mask, changed from rdx
+
+	xor rdx, rdx
 	xor rax, rax
-	xor rcx, rcx
+	mov rax, %1
+	cdq
+	mov rdx, 8
+	mul rdx
+	neg rax
+	add rax, 8*8
+	
 
-	mov rax, [r13]
-	mov rcx, [r13]
-	mov rdx, 0xFFFFFFFFFFFFFFFF
-
-	neg %1
-	shr rax, 8*8+%1*8
-	shr rdx, 8*8+%1*8
+	shr rax, cl ; rax changed to rbp
+	shr rdx, cl ; rdx changed to rsp
 	and rax, rdx
-	shl rdx, 8*8+%1*8
-	neg %1
+	shl rdx, cl
 
-	shr rcx, 8*8+%1*8
-	shr rdx, 8*8+%1*8
+	shr rcx, cl
+	shr rdx, cl
 	and rcx, rdx
 	
 	add rax,rcx
@@ -84,12 +92,13 @@ full_reg:
 	jnb full_reg ; if there is still at least one full register to convert
 	jz end ; if there were only full registers to be processed
 
+	xor r11, r11
 unfull:
 	norm_unfull r10
 	sub r10, 1
 	jnbe unfull
 
-	mov r11, rax
+	add r11, rax
 	put_full_reg
 
 end:
