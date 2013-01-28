@@ -35,11 +35,11 @@ global asm_grayscale:function
 %endmacro
 
 %macro norm_unfull 1 ; normalization for images with dimension not being multiply of 8
-	xor rbp, rbp
-	xor rsp, rsp
+	xor r9, r9
+	xor r8, r8
 
-	mov rbp, [r13] ; tmp1 changed from rax
-	mov rsp, [r13] ; tmp2 changed from rcx
+	mov r9, [r13] ; tmp1 changed from rax
+	mov r8, [r13] ; tmp2 changed from rcx
 	mov rbx, 0xFFFFFFFFFFFFFFFF ; mask, changed from rdx
 
 	xor rax, rax
@@ -50,21 +50,21 @@ global asm_grayscale:function
 	mov rcx, rax ; and here we're ready to do shifting
 	
 
-	shr rbp, cl ; tmp1 shifting
-	shr rsp, cl ; tmp2 shifting
-	and rbp, rsp
-	shl rsp, cl
+	shr r9, cl ; tmp1 shifting
+	shr r8, cl ; tmp2 shifting
+	and r9, r8
+	shl r8, cl
 
 	xor rax, rax
 	mov rax, %1 ; storing 'n' here
 	shl rax, 3 ; multiply by 8, so 'n' fits the needs
 	mov rax, rcx
 
-	shr rbp, cl
+	shr r9, cl
 	shr rbx, cl
-	and rbp, rbx
+	and r9, rbx
 	
-	add rbp, rsp
+	add r9, r8
 %endmacro
 
 asm_grayscale:
@@ -101,7 +101,7 @@ unfull:
 	sub r10, 1
 	jnbe unfull
 
-	add r11, rbp
+	add r11, r9
 	put_full_reg
 
 end:
