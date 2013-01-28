@@ -42,26 +42,29 @@ global asm_grayscale:function
 	mov rsp, [r13] ; tmp2 changed from rcx
 	mov rbx, 0xFFFFFFFFFFFFFFFF ; mask, changed from rdx
 
-	xor rdx, rdx
 	xor rax, rax
-	mov rax, %1
-	cdq
-	mov rdx, 8
-	mul rdx
-	neg rax
-	add rax, 8*8
+	mov rax, %1 ; storing 'n' here
+	shl rax, 3 ; multiply by 8, so 'n' fits the needs
+	neg rax ; we get '(-n)'
+	add rax, 8*8 ; here we have 8-n
+	mov rcx, rax ; and here we're ready to do shifting
 	
 
-	shr rax, cl ; rax changed to rbp
-	shr rdx, cl ; rdx changed to rsp
-	and rax, rdx
-	shl rdx, cl
+	shr rbp, cl ; tmp1 shifting
+	shr rsp, cl ; tmp2 shifting
+	and rbp, rsp
+	shl rsp, cl
 
-	shr rcx, cl
-	shr rdx, cl
-	and rcx, rdx
+	xor rax, rax
+	mov rax, %1 ; storing 'n' here
+	shl rax, 3 ; multiply by 8, so 'n' fits the needs
+	mov rax, rcx
+
+	shr rbp, cl
+	shr rbx, cl
+	and rbp, rbx
 	
-	add rax,rcx
+	add rbp, rsp
 %endmacro
 
 asm_grayscale:
@@ -98,7 +101,7 @@ unfull:
 	sub r10, 1
 	jnbe unfull
 
-	add r11, rax
+	add r11, rbp
 	put_full_reg
 
 end:
