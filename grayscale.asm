@@ -80,13 +80,21 @@ asm_grayscale:
 	mov r10, r14 ; for the loop counter r10 is used
 
 full_reg:
+	xor r11, r11
 	norm_pixel 7
+	shl r11, 8
 	norm_pixel 6
+	shl r11, 8
 	norm_pixel 5
+	shl r11, 8
 	norm_pixel 4
+	shl r11, 8
 	norm_pixel 3
+	shl r11, 8
 	norm_pixel 2
+	shl r11, 8
 	norm_pixel 1
+	shl r11, 8
 	norm_pixel 0
 
 	put_full_reg
