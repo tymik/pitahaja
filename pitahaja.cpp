@@ -14,6 +14,8 @@ void menu (int argc, char* argv[]) {
 const char *img_path="images/FF7F3F_25x25.png";
 const char *img_path2="images/3F7FFF_25x25.png";
 const char *img_path3="images/FF6600_25x25.png";
+const char *img_path4="images/dean_negacid.jpg";
+const char *img_path5="images/dsc0089nk.jpg";
 
 	po::options_description desc("Usage:\npitahaja [options] source destination");
 	desc.add_options()
@@ -33,15 +35,15 @@ const char *img_path3="images/FF6600_25x25.png";
 		cout << "Just a placeholder\n";
 	else if (param.count("tryimg")) {
 		Image image = Image();
-		image.load(img_path3);
+		image.load(img_path4);
 		image.run_func(asm_grayscale);
-		image.save("images/save_test3.png");
+		image.save("images/save_test4.png");
 	}
 	else if (param.count("tryimg2")) {
 		Image image = Image();
-		image.load(img_path2);
+		image.load(img_path5);
 		image.run_func(asm_invert);
-		image.save("images/save_test2.png");
+		image.save("images/save_test5.png");
 	}
 	else {
 		cout << "Not a valid execution arguments\n";
