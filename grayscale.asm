@@ -1,6 +1,7 @@
 global asm_grayscale:function
 
 %macro norm_pixel 1 ; must xor r11, r11 before call norm_pixel 7
+	shl r11, 8
 	xor rax, rax
 
 	mov r12, [r13] ; red
@@ -82,19 +83,12 @@ asm_grayscale:
 full_reg:
 	xor r11, r11
 	norm_pixel 7
-	shl r11, 8
 	norm_pixel 6
-	shl r11, 8
 	norm_pixel 5
-	shl r11, 8
 	norm_pixel 4
-	shl r11, 8
 	norm_pixel 3
-	shl r11, 8
 	norm_pixel 2
-	shl r11, 8
 	norm_pixel 1
-	shl r11, 8
 	norm_pixel 0
 
 	put_full_reg
